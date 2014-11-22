@@ -2,19 +2,32 @@ Installation is easy:
 
 First, install composer:
 https://getcomposer.org/doc/00-intro.md
+
 Windows installation instructions are here: 
 https://getcomposer.org/doc/00-intro.md#installation-windows
 
-Then install the dependencies, to pull down the libraries used on the project:
+Then pull down the libraries used on the project:
 
-php composer.phar install
+    php composer.phar install
 
 OR
 
-composer install
+    composer install
 
-This will download/install a lot of stuff for silex & phpunit to work.
+This will download/install a lot of parts for silex & phpunit to work.
 
 Now just run the tests to make sure that you've got stuff working!
 
-vendor/bin/phpunit tests
+    vendor/bin/phpunit tests
+
+
+Want to check out the web stuff in the easiest way possible?  
+1. From the command line, run the php builtin webserver to serve the site:
+
+    php -S localhost:9999 -t www/
+
+2. Browse to the hello world url of the site
+
+    http://localhost:9999/hello/world
+
+And you should get a page with just "hello world" in it.  Done, you've got the basics!
