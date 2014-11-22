@@ -1,0 +1,15 @@
+Installaction is easy:
+
+First, install composer:
+https://getcomposer.org/doc/00-intro.md
+Windows installation instructions are here: 
+https://getcomposer.org/doc/00-intro.md#installation-windows
+
+Then install the dependencies, to pull down the libraries used on the project:
+
+php composer.phar install
+
+OR
+
+composer install
+
