@@ -16,6 +16,13 @@ OR
 
 This will download/install a lot of parts for silex & phpunit to work.
 
+
+Now, copy over /config.template.php to config.php:
+
+    cp config.template.php config.php
+
+And edit the contents of config.php to match your specific application.
+
 Now just run the tests to make sure that you've got stuff working!
 
     vendor/bin/phpunit tests

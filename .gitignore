@@ -3,3 +3,4 @@ dev/*
 vendor/*
 !vendor/.gitkeep
 unclean
+config.php
