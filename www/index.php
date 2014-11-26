@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/../vendor/autoload.php'; // Auto loads the dependencies, e.g. the whole of silex
+require_once realpath(__DIR__.'/../').'/vendor/autoload.php'; // Auto loads the dependencies, e.g. the whole of silex
 
 // Instantiate the app
 $app = new Silex\Application();
