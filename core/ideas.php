@@ -28,7 +28,7 @@ class Idea{
 
 	// The idea phrase/title.
 	function phrase(){
-		return $this->phrase();
+		return $this->phrase;
 	}
 
 	function id(){
@@ -37,7 +37,7 @@ class Idea{
 
 	// Add a single star to an idea.
 	function addStar(){
-		$this->stars = $this->stars++;
+		$this->stars = ($this->stars + 1);
 	}
 
 	function stars(){
@@ -52,11 +52,17 @@ class IdeaFactory{
 	static public function all(){
 		// MOCK ideas for now, just to test the system!
 		$idea = new Idea('Hello World');
+		$idea->setId(1);
 		$idea2 = new Idea('Ping Pong');
+		$idea->setId(2);
 		$idea3 = new Idea('Ducks');
+		$idea->setId(3);
 		$idea4 = new Idea('Zip Zing');
+		$idea->setId(4);
 		$idea5 = new Idea('Formulate');
+		$idea->setId(5);
 		$idea6 = new Idea('Ninja');
+		$idea->setId(7); // Skip numbers, as database ids are sometimes wont to do
 		$ideas = array('1'=>$idea, '2'=>$idea2, '3'=>$idea3, '4'=>$idea4, '5'=>$idea5, '7'=>$idea6); // Array of ideas.
 		return $ideas;
 	}
