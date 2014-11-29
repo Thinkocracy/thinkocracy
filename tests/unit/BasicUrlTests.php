@@ -15,6 +15,11 @@ class BasicUrlTests extends PHPUnit_Framework_TestCase{
 		}
 	}
 
+	function bespokeIsJSON($content){
+		json_decode($content);
+ 		return (json_last_error() == JSON_ERROR_NONE);
+	}
+
 	// Simple helper function to get any arbitrary url's contents.
 	function getUrlContents($url){
 		$headers = get_headers($url, 1); // Get headers as array.
@@ -24,26 +29,27 @@ class BasicUrlTests extends PHPUnit_Framework_TestCase{
 		return null; // Nope, it didn't load right.
 	}
 
-	function testHomepageUrl(){
-		$url = 'http://localhost:9999';
+	function testHomepageUrlLoads(){
+		$url = BASE_URL;
 		$this->assertTrue($this->urlDoesntError($url));
 		$content = $this->getUrlContents($url);
 		$this->assertTrue(!empty($content));
 	}
 
-	function testHelloWorldUrl(){
-		$url = 'http://localhost:9999/hello/world';
+	function testHelloWorldUrlLoads(){
+		$url = BASE_URL.'hello/world';
 		$this->assertTrue($this->urlDoesntError($url));
 		$content = $this->getUrlContents($url);
 		$this->assertTrue(!empty($content));
 	}
 
-	function testBasicAPIReturnsStuff(){
-		$url = 'http://localhost:9999/api/pulldata/input';
+	function testBasicAPIUrlTestReturnsSomethingInJSONformat(){ // All other api tests beyond this basic thing go in the api test suite.
+		$url = BASE_URL.'api/test';
 		$this->assertTrue($this->urlDoesntError($url));
 		$content = $this->getUrlContents($url);
-		$this->assertTrue(!empty($content));
+		$this->assertNotEmpty($content);
+		//$content = '{"data":"true", "another":"thing"}';
+		$this->assertTrue($this->bespokeIsJSON($content), 'Is not json: '.$content);
 	}
-
 
 }
