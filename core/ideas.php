@@ -41,7 +41,7 @@ class Idea{
 	}
 
 	function stars(){
-		return $this->stars();
+		return $this->stars;
 	}
 }
 
