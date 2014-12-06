@@ -28,10 +28,9 @@ class ApiTests extends PHPUnit_Framework_TestCase{
 	}
 
 	function testApiGetUrlsReturnJson(){
-		$urls = array('', '/1', '/search/ninja');
+		$urls = array('', '/search/ninja');
 
 		// Example url: http://localhost:9999/api/ideas/
-		// Example url: http://localhost:9999/api/ideas/1
 		// Example url: http://localhost:9999/api/ideas/search/ninja
 		$base_url = BASE_URL.'api/ideas';
 		foreach($urls as $extra_url_param){
@@ -44,6 +43,18 @@ class ApiTests extends PHPUnit_Framework_TestCase{
 			$idea = reset($response);
 			$this->assertTrue(is_string($idea['phrase']), 'Idea array didn\'t have a phrase key for the url: '.$base_url.$extra_url_param);
 		}
+	}
+
+	function testsApiReturnsJsonDataForSingleIdeaGetting(){
+		// Example url: http://localhost:9999/api/ideas/1
+		$extra_url_param = '/1';
+		$base_url = BASE_URL.'api/ideas';
+
+		// Get the single idea or single whatever.
+		// Make sure that it actually gives back some data, I'm relying on there being a idea with id 1 in the database for now.
+		$response = $this->getParsedApiJson($base_url, $extra_url_param);
+		$this->assertNotEmpty($response, 'The api didn\'t correctly return a usable response to: '.$base_url.$extra_url_param);
+		$this->assertTrue(is_string($response['phrase']), 'Idea wasn\'t returned for the first id, using url: '.$base_url.$extra_url_param);
 	}
 
 	function testApiPostUrlsWork(){

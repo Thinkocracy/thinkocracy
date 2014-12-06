@@ -41,6 +41,9 @@ $app->get('/', function() use ($app){
 	<script>
 	$(function(){
 		pullIdeas(); // Pull ideas from the api!
+		pullIdeaById(1, function(data){ // Pull the first idea and execute some callback upon it
+			console.log(data, data.phrase); // Just console log it for now.
+		}); 
 	});
 	</script>';
 });
@@ -59,7 +62,7 @@ $app->get('/api/ideas/{id}', function($id) use ($app){
 	if(!$idea instanceof Idea){
 		return $app->json(array('success'=>'false','error'=>'No idea found for that id'), 404);// Idea not found.
 	}
-	return $app->json(array($idea));
+	return $app->json($idea);
 });
 
 $app->get('/api/ideas', function() use ($app){
