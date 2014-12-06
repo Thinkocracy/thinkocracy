@@ -18,7 +18,7 @@ class Idea{
 
 	// Set the new id of a newly saved idea.
 	function setId($id){
-		if(isset($this->id) && $this->id){ // Don't set an idea on an idea that already exists!
+		if(isset($this->id) && is_numeric($this->id) && $this->id > 0){ // Don't set an idea on an idea that already exists!
 			return false;
 		} else {
 			$this->id = $id;
@@ -54,15 +54,15 @@ class IdeaFactory{
 		$idea = new Idea('Hello World');
 		$idea->setId(1);
 		$idea2 = new Idea('Ping Pong');
-		$idea->setId(2);
+		$idea2->setId(2);
 		$idea3 = new Idea('Ducks');
-		$idea->setId(3);
+		$idea3->setId(3);
 		$idea4 = new Idea('Zip Zing');
-		$idea->setId(4);
+		$idea4->setId(4);
 		$idea5 = new Idea('Formulate');
-		$idea->setId(5);
+		$idea5->setId(5);
 		$idea6 = new Idea('Ninja');
-		$idea->setId(7); // Skip numbers, as database ids are sometimes wont to do
+		$idea6->setId(7); // Skip numbers, as database ids are sometimes wont to do
 		$ideas = array('1'=>$idea, '2'=>$idea2, '3'=>$idea3, '4'=>$idea4, '5'=>$idea5, '7'=>$idea6); // Array of ideas.
 		return $ideas;
 	}

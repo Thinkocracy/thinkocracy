@@ -14,6 +14,12 @@ class IdeaTests extends PHPUnit_Framework_TestCase{
 		$this->assertNotEmpty((string)$idea);
 	}
 
+	function testGetAndSetOfIdeaId(){
+		$idea = new Idea('awesomenexxxx');
+		$idea->setId(34);
+		$this->assertEquals(34, $idea->id());
+	}
+
 	function testIdeaObjectHasStuffThatItDoes(){
 		$idea = new Idea('give me stars');
 		$idea->addStar();
@@ -43,6 +49,16 @@ class IdeaTests extends PHPUnit_Framework_TestCase{
 		foreach($ideas as $idea){
 			$this->assertInstanceOf('Idea', $idea);
 		}
+	}
+
+	function testGetAFewIdeasById(){
+		$idea = IdeaFactory::idea(1);
+		$idea2 = IdeaFactory::idea(2);
+		$idea3 = IdeaFactory::idea(3);
+		$this->assertInstanceOf('Idea', $idea);
+		$this->assertInstanceOf('Idea', $idea2);
+		$this->assertInstanceOf('Idea', $idea3);
+		$this->assertEquals(3, $idea3->id());
 	}
 
 	function testSearchThroughIdeasAndFindSpecificOnes(){
