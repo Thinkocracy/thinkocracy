@@ -96,10 +96,10 @@ class IdeaFactory{
 	static public function search($term){
 		$all_ideas = IdeaFactory::all();
 		// TODO: Replace this horrible hack with better search matching!
-		array_filter($all_ideas, function($el) use ($term) {
-        	return ( strpos($el->phrase(), $term) !== false );
+		$filtered_ideas = array_filter($all_ideas, function($el) use ($term) {
+        	return ( stripos($el->phrase(), $term) !== false ); // Case insensitive matching.
     	});
-    	return $all_ideas; // Filtered now.
+    	return $filtered_ideas; // Filtered now.
 	}
 
 	// Convert the full collection to a string.  Maybe should convert to json eventually.

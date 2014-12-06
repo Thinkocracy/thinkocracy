@@ -41,7 +41,7 @@ class ApiTests extends PHPUnit_Framework_TestCase{
 			$this->assertNotEmpty(reset($response), 'The idea wasn\'t a array didn\'t have a first item, full response was '.print_r($response, true));
 			$this->assertTrue(is_array(reset($response)));
 			$idea = reset($response);
-			$this->assertTrue(is_string($idea['phrase']), 'Idea array didn\'t have a phrase key for the url: '.$base_url.$extra_url_param);
+			$this->assertTrue(is_string($idea['phrase']), 'First idea data set didn\'t have a phrase, from the url: '.$base_url.$extra_url_param);
 		}
 	}
 
@@ -55,6 +55,22 @@ class ApiTests extends PHPUnit_Framework_TestCase{
 		$response = $this->getParsedApiJson($base_url, $extra_url_param);
 		$this->assertNotEmpty($response, 'The api didn\'t correctly return a usable response to: '.$base_url.$extra_url_param);
 		$this->assertTrue(is_string($response['phrase']), 'Idea wasn\'t returned for the first id, using url: '.$base_url.$extra_url_param);
+	}
+
+	function testAPISearchReturnsOnlyActualMatches(){
+		// Example url: http://localhost:9999/api/ideas/search/duck
+		$extra_url_param = '/search/duck';
+		$base_url = BASE_URL.'api/ideas';
+
+		// Get matches to the "duck" search term.
+		$matches = $this->getParsedApiJson($base_url, $extra_url_param);
+		$filtered_ideas = IdeaFactory::search('duck');
+		$all_ideas = IdeaFactory::all();
+		$this->assertGreaterThan(0, count($matches));
+		$this->assertEquals(count($matches), count($filtered_ideas));
+		$this->assertEquals(1, count($matches));
+		$this->assertLessThan(count($all_ideas), count($filtered_ideas));
+		// for now, assume only a single idea, at least in the mock data, involves a duck.
 	}
 
 	function testApiPostUrlsWork(){
